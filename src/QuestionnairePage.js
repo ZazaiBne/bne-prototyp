@@ -1,157 +1,139 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const questions = [
-  { id: 1, text: "Unsere Mitarbeitenden werden regelmäßig zu Nachhaltigkeit und globalen Zielen fortgebildet." },
-  { id: 2, text: "Nachhaltigkeit wird systematisch in unsere Programmplanung integriert." },
-  { id: 3, text: "Unsere Bildungsangebote orientieren sich an Prinzipien wie Partizipation, Lebensweltbezug und Zukunftsfähigkeit." },
-  { id: 4, text: "Wir fördern bei Teilnehmenden das Erkennen globaler Zusammenhänge." },
-  { id: 5, text: "Wir bieten regelmäßig Angebote zu ökologischen, sozialen und wirtschaftlichen Themen an, die zu nachhaltigem Handeln im Alltag anregen." },
-  { id: 6, text: "Wir holen Rückmeldungen zu Bewusstsein und Handlungsbereitschaft ein." },
-  { id: 7, text: "Wir analysieren unseren Beitrag zu globalen Zielen mit Hilfe von Indikatoren." },
-  { id: 8, text: "Evaluationsergebnisse werden genutzt, um unsere Angebote weiterzuentwickeln." },
-  { id: 9, text: "Unsere Einrichtung achtet auf einen ressourcenschonenden Alltag (Energie, Abfall, Beschaffung)." },
-  { id: 10, text: "Werte wie Solidarität, Gerechtigkeit und Umweltbewusstsein werden aktiv gelebt." },
-  { id: 11, text: "Unsere Einrichtung arbeitet mit Partnern zusammen, die ebenfalls für Nachhaltigkeit stehen." },
-  { id: 12, text: "Armut wird in unserer Region als relevantes Thema wahrgenommen." },
-  { id: 13, text: "Unsere Einrichtung hat sich bereits in Projekten gegen Armut engagiert." },
-  { id: 14, text: "Besucher*innen mit unterschiedlichen sprachlichen oder kulturellen Hintergründen fühlen sich angesprochen." },
-  { id: 15, text: "Bei der Angebotsplanung werden verschiedene Zielgruppen aktiv einbezogen." },
-  { id: 16, text: "Es finden regelmäßig Angebote zu Ernährung, Hunger, nachhaltiger Landwirtschaft und Gesundheitsthemen statt." },
-  { id: 17, text: "Der Bezug zur Lebenswelt der Teilnehmenden wird bei den Themen Ernährung und Gesundheit berücksichtigt." },
-  { id: 18, text: "Die Relevanz der Themen Ernährung und Gesundheit wird für unsere Zielgruppe als hoch eingeschätzt." },
-  { id: 19, text: "Individuelle Lern- und Entwicklungsbedürfnisse der Kinder werden berücksichtigt." },
-  { id: 20, text: "Kinder können eigene Ideen oder Themen in den Alltag einbringen." },
-  { id: 21, text: "Es gibt gezielte Angebote zur Förderung sozialer Kompetenzen." },
-  { id: 22, text: "Verschiedene Lernformen werden bewusst in den Alltag integriert." },
-  { id: 23, text: "Unsere Einrichtung trägt dazu bei, Bildungsangebote unabhängig von Herkunft zugänglich zu machen." },
-  { id: 24, text: "Unsere Einrichtung stellt sicher, dass Kinder unabhängig vom Geschlecht gleichberechtigt teilnehmen können." },
-  { id: 25, text: "Unsere Materialien fördern Diversität und Inklusion." },
-  { id: 26, text: "Geschlechterspezifische Bedürfnisse werden pädagogisch berücksichtigt." },
-  { id: 27, text: "Wir gehen sparsam mit Wasser und Energie um." },
-  { id: 28, text: "Wir beteiligen uns an Initiativen zum Wasserschutz." },
-  { id: 29, text: "Wir behandeln regelmäßig Energie- und Umweltthemen in Angeboten." },
-  { id: 30, text: "Digitale Geräte werden möglichst lange genutzt." },
-  { id: 31, text: "Wir gehen reflektiert mit Digitalisierung um." },
-  { id: 32, text: "Wir vermeiden aktiv Abfall." },
-  { id: 33, text: "Unsere Mitarbeitenden sind nachhaltig mobil." },
-  { id: 34, text: "Ressourcenschonung ist Teil unserer Organisation." },
-  { id: 35, text: "Wir sensibilisieren für bewussten Konsum." },
-  { id: 36, text: "Wir engagieren uns für Umwelt- und Naturschutz." },
-  { id: 37, text: "Wir achten beim Einkauf auf nachhaltige Produkte." },
-  { id: 38, text: "Wir reflektieren regelmäßig unsere Nachhaltigkeitsziele." },
-  { id: 39, text: "Wir kooperieren mit nachhaltigen Partnern." },
-  { id: 40, text: "Wir nehmen regelmäßig an BNE-Fortbildungen teil." }
+  { id: 'q1', text: 'Wie oft thematisieren Sie Umweltschutz in Ihrer Arbeit?' },
+  { id: 'q2', text: 'Wie stark fördern Sie soziale Gerechtigkeit?' },
+  { id: 'q3', text: 'Beziehen Sie Nachhaltigkeitsthemen in Ihre Angebote mit ein?' },
+  { id: 'q4', text: 'Wie gut motivieren Sie Teilnehmende zur aktiven Mitgestaltung?' },
+  { id: 'q5', text: 'Arbeiten Sie mit anderen Organisationen zusammen, um Nachhaltigkeit zu fördern?' },
+  { id: 'q6', text: 'Wie oft reflektieren Sie Ihre eigene Rolle in Bezug auf nachhaltige Entwicklung?' },
+  { id: 'q7', text: 'Nutzen Sie Materialien, die Umweltbewusstsein stärken?' },
+  { id: 'q8', text: 'Fördern Sie interkulturelle Verständigung und Respekt?' },
+  { id: 'q9', text: 'Wie oft binden Sie die Teilnehmenden in Entscheidungsprozesse ein?' },
+  { id: 'q10', text: 'Setzen Sie sich für soziale Gerechtigkeit und Chancengleichheit ein?' },
+  { id: 'q11', text: 'Wie oft thematisieren Sie klimafreundliches Verhalten?' },
+  { id: 'q12', text: 'Fördern Sie Verantwortungsbewusstsein gegenüber zukünftigen Generationen?' },
+  { id: 'q13', text: 'Beziehen Sie globale Zusammenhänge in Ihre Arbeit ein?' },
+  { id: 'q14', text: 'Wie stark regen Sie zur kritischen Auseinandersetzung mit Nachhaltigkeitsthemen an?' },
+  { id: 'q15', text: 'Organisieren Sie Aktionen oder Projekte zum Umweltschutz?' },
+  { id: 'q16', text: 'Wie häufig arbeiten Sie mit Partnern aus der Zivilgesellschaft zusammen?' },
+  { id: 'q17', text: 'Geben Sie praktische Tipps für nachhaltiges Handeln?' },
+  { id: 'q18', text: 'Fördern Sie Toleranz und friedliches Zusammenleben?' },
+  { id: 'q19', text: 'Wie oft nutzen Sie digitale Medien, um Nachhaltigkeit zu vermitteln?' },
+  { id: 'q20', text: 'Unterstützen Sie die Teilnehmenden bei der Umsetzung nachhaltiger Ideen?' },
+  { id: 'q21', text: 'Wie stark berücksichtigen Sie soziale Aspekte in Ihren Programmen?' },
+  { id: 'q22', text: 'Setzen Sie sich für den Erhalt der Biodiversität ein?' },
+  { id: 'q23', text: 'Fördern Sie den bewussten Umgang mit Ressourcen?' },
+  { id: 'q24', text: 'Wie oft sensibilisieren Sie für nachhaltigen Konsum?' },
+  { id: 'q25', text: 'Stärken Sie die Handlungskompetenz der Teilnehmenden?' },
+  { id: 'q26', text: 'Wie sehr integrieren Sie Themen der globalen Gerechtigkeit?' },
+  { id: 'q27', text: 'Unterstützen Sie lokale Initiativen zum Umweltschutz?' },
+  { id: 'q28', text: 'Wie oft thematisieren Sie nachhaltige Mobilität?' },
+  { id: 'q29', text: 'Fördern Sie ein Bewusstsein für Klimawandel und seine Folgen?' },
+  { id: 'q30', text: 'Arbeiten Sie inklusiv und barrierefrei?' },
+  { id: 'q31', text: 'Wie oft ermutigen Sie zu ehrenamtlichem Engagement?' },
+  { id: 'q32', text: 'Nutzen Sie spielerische Methoden, um Nachhaltigkeit zu vermitteln?' },
+  { id: 'q33', text: 'Wie stark beziehen Sie lokale Lebenswelten in Ihre Angebote ein?' },
+  { id: 'q34', text: 'Fördern Sie kreatives Denken und Problemlösen?' },
+  { id: 'q35', text: 'Setzen Sie sich für Frieden und Konfliktlösung ein?' },
+  { id: 'q36', text: 'Wie oft bieten Sie Fortbildungen zum Thema Nachhaltigkeit an?' },
+  { id: 'q37', text: 'Unterstützen Sie die Vernetzung von Akteur*innen im Nachhaltigkeitsbereich?' },
+  { id: 'q38', text: 'Wie stark fördern Sie das Bewusstsein für Menschenrechte?' },
+  { id: 'q39', text: 'Fördern Sie den Dialog zwischen verschiedenen Generationen?' },
+  { id: 'q40', text: 'Wie oft reflektieren Sie Ihre Lernprozesse im Bereich Nachhaltigkeit?' },
 ];
 
-const scaleLabels = ["trifft nicht zu", "trifft eher nicht zu", "teils-teils", "trifft eher zu", "trifft zu"];
 const QUESTIONS_PER_PAGE = 4;
+
+const answerOptions = [
+  { value: 1, label: 'trifft zu' },
+  { value: 2, label: 'trifft eher zu' },
+  { value: 3, label: 'teils - teils' },
+  { value: 4, label: 'trifft eher nicht zu' },
+  { value: 5, label: 'trifft nicht zu' },
+];
+
 export default function QuestionnairePage() {
   const { pageNumber } = useParams();
   const pageIndex = parseInt(pageNumber, 10) - 1;
+  const totalPages = Math.ceil(questions.length / QUESTIONS_PER_PAGE);
   const navigate = useNavigate();
-  const [answers, setAnswers] = useState({});
+
+  const [answers, setAnswers] = useState(() => {
+    const saved = localStorage.getItem('bneAnswers');
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  const currentQuestions = questions.slice(
+    pageIndex * QUESTIONS_PER_PAGE,
+    (pageIndex + 1) * QUESTIONS_PER_PAGE
+  );
 
   useEffect(() => {
-    const saved = localStorage.getItem('bne-answers');
-    if (saved) setAnswers(JSON.parse(saved));
-  }, []);
+    const newAnswers = { ...answers };
+    let changed = false;
+    currentQuestions.forEach(q => {
+      if (newAnswers[q.id] === undefined) {
+        newAnswers[q.id] = 3; // Default = "teils - teils"
+        changed = true;
+      }
+    });
+    if (changed) setAnswers(newAnswers);
+  }, [pageIndex]);
 
   useEffect(() => {
-    localStorage.setItem('bne-answers', JSON.stringify(answers));
+    localStorage.setItem('bneAnswers', JSON.stringify(answers));
   }, [answers]);
 
-  const start = pageIndex * QUESTIONS_PER_PAGE;
-  const currentQuestions = questions.slice(start, start + QUESTIONS_PER_PAGE);
-  const totalPages = Math.ceil(questions.length / QUESTIONS_PER_PAGE);
-
   const handleAnswer = (id, value) => {
-    setAnswers({ ...answers, [id]: parseInt(value) });
+    setAnswers({ ...answers, [id]: parseInt(value, 10) });
   };
 
+  const isComplete = currentQuestions.every(q => answers[q.id] !== undefined);
+
   const next = () => {
-    if (pageIndex < totalPages - 1) navigate(`/seite/${pageIndex + 2}`);
-    else navigate('/auswertung');
+    if (pageIndex < totalPages - 1) {
+      navigate(`/seite/${pageIndex + 2}`);
+    } else {
+      navigate('/auswertung');
+    }
   };
 
   const prev = () => {
-    if (pageIndex > 0) navigate(`/seite/${pageIndex}`);
+    if (pageIndex > 0) {
+      navigate(`/seite/${pageIndex}`);
+    }
   };
 
-  const isComplete = currentQuestions.every(q => answers[q.id]);
-
-  if (pageNumber === 'auswertung') {
-    const positive = Object.values(answers).filter(v => v >= 4).length;
-
-    const learning = [
-      { title: "🎥 BNE-Erklärung (YouTube)", link: "https://www.youtube.com/watch?v=nx2jE9xEg3g" },
-      { title: "🌍 Klimaschutz in der Bildung", link: "https://www.bne-portal.de/de/bne-umsetzen/klimaschutz-und-bne-22842" },
-      { title: "📘 Flipcards zu SDGs", link: "https://www.bne-portal.de/files/flipcards_sdgs_bne.pdf" }
-    ];
-
-    let text = "";
-    if (positive >= 30) text = "✅ Sehr gute Umsetzung von BNE!";
-    else if (positive >= 15) text = "🟡 Solide, aber noch entwicklungsfähig.";
-    else text = "🔴 Startpunkt – mit Potenzial nach oben!";
-
-    return (
-      <div className="p-10 max-w-3xl mx-auto space-y-6">
-        <h2 className="text-3xl font-bold text-bneGreen">🎉 Vielen Dank!</h2>
-        <p>Du hast <strong>{positive}</strong> von {questions.length} Aussagen mit <em>„trifft (eher) zu“</em> bewertet.</p>
-        <p className="text-bneGreen font-medium">{text}</p>
-        <h3 className="text-xl mt-6 font-semibold">📚 Empfohlene Lernmaterialien:</h3>
-        <ul className="list-disc list-inside space-y-2">
-          {learning.map((item, i) => (
-            <li key={i}>
-              <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
-                {item.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <button
-          onClick={() => {
-            setAnswers({});
-            localStorage.removeItem('bne-answers');
-            navigate('/seite/1');
-          }}
-          className="mt-6 bg-bneGreen text-bneBeige px-4 py-2 rounded"
-        >
-          🔁 Fragebogen neu starten
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-bneBeige min-h-screen">
-      <h2 className="text-xl font-semibold text-bneGreen mb-6">
-        Seite {pageIndex + 1} von {totalPages}
+    <div className="p-10">
+      <h2 className="text-2xl font-bold text-bneGreen mb-6">
+        Fragebogen Seite {pageIndex + 1} von {totalPages}
       </h2>
 
-      <div className="space-y-8">
-        {currentQuestions.map((q) => (
-          <div key={q.id}>
-            <p className="mb-2 font-medium text-gray-800">{q.text}</p>
-            <input
-              type="range"
-              min="1"
-              max="5"
-              step="1"
-              value={answers[q.id] || 3}
-              onChange={(e) => handleAnswer(q.id, e.target.value)}
-              className="w-full accent-bneGreen"
-            />
-            <div className="flex justify-between text-sm mt-1 text-gray-600">
-              {scaleLabels.map((label, i) => (
-                <span key={i} className="w-1/5 text-center">{label}</span>
-              ))}
-            </div>
+      {currentQuestions.map(q => (
+        <div key={q.id} className="mb-8">
+          <p className="mb-2 font-semibold">{q.text}</p>
+          <div className="flex justify-between max-w-xl">
+            {answerOptions.map(option => (
+              <label key={option.value} className="flex flex-col items-center cursor-pointer">
+                <input
+                  type="radio"
+                  name={q.id}
+                  value={option.value}
+                  checked={answers[q.id] === option.value}
+                  onChange={(e) => handleAnswer(q.id, e.target.value)}
+                  className="mb-1"
+                />
+                <span className="text-sm">{option.label}</span>
+              </label>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
 
-      <div className="mt-10 flex justify-between">
+      <div className="flex justify-between mt-6">
         <button
           onClick={prev}
           disabled={pageIndex === 0}
@@ -167,18 +149,6 @@ export default function QuestionnairePage() {
         >
           {pageIndex < totalPages - 1 ? 'Weiter' : 'Zur Auswertung'}
         </button>
-      </div>
-
-      <div className="mt-6 text-sm text-center text-gray-500">
-        {Array.from({ length: totalPages }).map((_, i) => (
-          <Link
-            key={i}
-            to={`/seite/${i + 1}`}
-            className={`mx-1 px-2 py-1 rounded ${i === pageIndex ? 'bg-bneGreen text-bneBeige' : 'bg-gray-200 hover:bg-gray-300'}`}
-          >
-            {i + 1}
-          </Link>
-        ))}
       </div>
     </div>
   );
