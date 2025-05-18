@@ -1,155 +1,122 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import QuestionSlider from "./QuestionSlider";
 
 const questions = [
-  { id: 'q1', text: 'Wie oft thematisieren Sie Umweltschutz in Ihrer Arbeit?' },
-  { id: 'q2', text: 'Wie stark fördern Sie soziale Gerechtigkeit?' },
-  { id: 'q3', text: 'Beziehen Sie Nachhaltigkeitsthemen in Ihre Angebote mit ein?' },
-  { id: 'q4', text: 'Wie gut motivieren Sie Teilnehmende zur aktiven Mitgestaltung?' },
-  { id: 'q5', text: 'Arbeiten Sie mit anderen Organisationen zusammen, um Nachhaltigkeit zu fördern?' },
-  { id: 'q6', text: 'Wie oft reflektieren Sie Ihre eigene Rolle in Bezug auf nachhaltige Entwicklung?' },
-  { id: 'q7', text: 'Nutzen Sie Materialien, die Umweltbewusstsein stärken?' },
-  { id: 'q8', text: 'Fördern Sie interkulturelle Verständigung und Respekt?' },
-  { id: 'q9', text: 'Wie oft binden Sie die Teilnehmenden in Entscheidungsprozesse ein?' },
-  { id: 'q10', text: 'Setzen Sie sich für soziale Gerechtigkeit und Chancengleichheit ein?' },
-  { id: 'q11', text: 'Wie oft thematisieren Sie klimafreundliches Verhalten?' },
-  { id: 'q12', text: 'Fördern Sie Verantwortungsbewusstsein gegenüber zukünftigen Generationen?' },
-  { id: 'q13', text: 'Beziehen Sie globale Zusammenhänge in Ihre Arbeit ein?' },
-  { id: 'q14', text: 'Wie stark regen Sie zur kritischen Auseinandersetzung mit Nachhaltigkeitsthemen an?' },
-  { id: 'q15', text: 'Organisieren Sie Aktionen oder Projekte zum Umweltschutz?' },
-  { id: 'q16', text: 'Wie häufig arbeiten Sie mit Partnern aus der Zivilgesellschaft zusammen?' },
-  { id: 'q17', text: 'Geben Sie praktische Tipps für nachhaltiges Handeln?' },
-  { id: 'q18', text: 'Fördern Sie Toleranz und friedliches Zusammenleben?' },
-  { id: 'q19', text: 'Wie oft nutzen Sie digitale Medien, um Nachhaltigkeit zu vermitteln?' },
-  { id: 'q20', text: 'Unterstützen Sie die Teilnehmenden bei der Umsetzung nachhaltiger Ideen?' },
-  { id: 'q21', text: 'Wie stark berücksichtigen Sie soziale Aspekte in Ihren Programmen?' },
-  { id: 'q22', text: 'Setzen Sie sich für den Erhalt der Biodiversität ein?' },
-  { id: 'q23', text: 'Fördern Sie den bewussten Umgang mit Ressourcen?' },
-  { id: 'q24', text: 'Wie oft sensibilisieren Sie für nachhaltigen Konsum?' },
-  { id: 'q25', text: 'Stärken Sie die Handlungskompetenz der Teilnehmenden?' },
-  { id: 'q26', text: 'Wie sehr integrieren Sie Themen der globalen Gerechtigkeit?' },
-  { id: 'q27', text: 'Unterstützen Sie lokale Initiativen zum Umweltschutz?' },
-  { id: 'q28', text: 'Wie oft thematisieren Sie nachhaltige Mobilität?' },
-  { id: 'q29', text: 'Fördern Sie ein Bewusstsein für Klimawandel und seine Folgen?' },
-  { id: 'q30', text: 'Arbeiten Sie inklusiv und barrierefrei?' },
-  { id: 'q31', text: 'Wie oft ermutigen Sie zu ehrenamtlichem Engagement?' },
-  { id: 'q32', text: 'Nutzen Sie spielerische Methoden, um Nachhaltigkeit zu vermitteln?' },
-  { id: 'q33', text: 'Wie stark beziehen Sie lokale Lebenswelten in Ihre Angebote ein?' },
-  { id: 'q34', text: 'Fördern Sie kreatives Denken und Problemlösen?' },
-  { id: 'q35', text: 'Setzen Sie sich für Frieden und Konfliktlösung ein?' },
-  { id: 'q36', text: 'Wie oft bieten Sie Fortbildungen zum Thema Nachhaltigkeit an?' },
-  { id: 'q37', text: 'Unterstützen Sie die Vernetzung von Akteur*innen im Nachhaltigkeitsbereich?' },
-  { id: 'q38', text: 'Wie stark fördern Sie das Bewusstsein für Menschenrechte?' },
-  { id: 'q39', text: 'Fördern Sie den Dialog zwischen verschiedenen Generationen?' },
-  { id: 'q40', text: 'Wie oft reflektieren Sie Ihre Lernprozesse im Bereich Nachhaltigkeit?' },
+  "Wie gut fördert Ihre Einrichtung nachhaltiges Denken?",
+  "Wie oft werden Themen wie Klimawandel oder Gerechtigkeit thematisiert?",
+  "Wie aktiv beteiligen sich die Teilnehmenden in Entscheidungsprozessen?",
+  "Gibt es Partnerschaften mit anderen Bildungseinrichtungen?",
+  "Wird in Ihrer Einrichtung ressourcenschonend gearbeitet?",
+  "Welche Rolle spielt Demokratiebildung im Alltag?",
+  "Werden kulturelle Unterschiede aktiv berücksichtigt?",
+  "Wie wird verantwortungsvolles Konsumverhalten gefördert?",
+  "Wie wird Medienkompetenz im Sinne nachhaltiger Entwicklung vermittelt?",
+  "Wie reflektieren die Fachkräfte ihr eigenes Verhalten?",
+  "Gibt es Projekte zu sozialem Engagement?",
+  "Wie wird mit Konflikten in der Gruppe umgegangen?",
+  "Werden globale Zusammenhänge thematisiert?",
+  "Werden außerschulische Lernorte genutzt?",
+  "Wie werden Kinder und Jugendliche zur Mitgestaltung ermutigt?",
+  "Gibt es eine langfristige BNE-Strategie?",
+  "Wie oft werden die Methoden reflektiert und angepasst?",
+  "Welche Rolle spielen Emotionen im Lernprozess?",
+  "Wie wird Kreativität im Sinne nachhaltiger Lösungen gefördert?",
+  "Werden die SDGs in der Bildungsarbeit sichtbar gemacht?",
+  "Wie divers ist das pädagogische Team?",
+  "Werden Benachteiligungen aktiv abgebaut?",
+  "Wie oft finden Fortbildungen zu BNE statt?",
+  "Wie transparent ist die Kommunikation in der Einrichtung?",
+  "Werden alternative Zukunftsszenarien besprochen?",
+  "Wie wird nachhaltige Mobilität gefördert?",
+  "Welche Rolle spielt Digitalisierung in der BNE?",
+  "Wie werden Eltern in die Arbeit einbezogen?",
+  "Gibt es Austausch mit internationalen Partnern?",
+  "Wie wird mit Fehlern umgegangen?",
+  "Werden Methoden der Zukunftswerkstätten eingesetzt?",
+  "Wie wird der Lernerfolg in BNE gemessen?",
+  "Gibt es eine Feedbackkultur?",
+  "Wie wird Eigenverantwortung gefördert?",
+  "Werden Aktivitäten regelmäßig dokumentiert?",
+  "Wie werden Zielkonflikte besprochen?",
+  "Wie werden die Themen Umwelt, Soziales, Ökonomie verknüpft?",
+  "Wie viel Gestaltungsspielraum haben Fachkräfte?",
+  "Werden auch unbequeme Themen offen angesprochen?",
+  "Wie oft werden externe Expert*innen eingeladen?"
 ];
 
-const QUESTIONS_PER_PAGE = 4;
+const questionsPerPage = 4;
 
-const answerOptions = [
-  { value: 1, label: 'trifft zu' },
-  { value: 2, label: 'trifft eher zu' },
-  { value: 3, label: 'teils - teils' },
-  { value: 4, label: 'trifft eher nicht zu' },
-  { value: 5, label: 'trifft nicht zu' },
-];
-
-export default function QuestionnairePage() {
+const QuestionnairePage = ({ responses, setResponses }) => {
   const { pageNumber } = useParams();
-  const pageIndex = parseInt(pageNumber, 10) - 1;
-  const totalPages = Math.ceil(questions.length / QUESTIONS_PER_PAGE);
   const navigate = useNavigate();
+  const page = parseInt(pageNumber || "1", 10);
 
-  const [answers, setAnswers] = useState(() => {
-    const saved = localStorage.getItem('bneAnswers');
-    return saved ? JSON.parse(saved) : {};
-  });
+  const startIndex = (page - 1) * questionsPerPage;
+  const currentQuestions = questions.slice(startIndex, startIndex + questionsPerPage);
 
-  const currentQuestions = questions.slice(
-    pageIndex * QUESTIONS_PER_PAGE,
-    (pageIndex + 1) * QUESTIONS_PER_PAGE
-  );
-
-  useEffect(() => {
-    const newAnswers = { ...answers };
-    let changed = false;
-    currentQuestions.forEach(q => {
-      if (newAnswers[q.id] === undefined) {
-        newAnswers[q.id] = 3; // Default = "teils - teils"
-        changed = true;
-      }
-    });
-    if (changed) setAnswers(newAnswers);
-  }, [pageIndex]);
-
-  useEffect(() => {
-    localStorage.setItem('bneAnswers', JSON.stringify(answers));
-  }, [answers]);
-
-  const handleAnswer = (id, value) => {
-    setAnswers({ ...answers, [id]: parseInt(value, 10) });
+  const handleSliderChange = (questionIndex, value) => {
+    const updatedResponses = [...responses];
+    updatedResponses[questionIndex] = value;
+    setResponses(updatedResponses);
   };
 
-  const isComplete = currentQuestions.every(q => answers[q.id] !== undefined);
-
-  const next = () => {
-    if (pageIndex < totalPages - 1) {
-      navigate(`/seite/${pageIndex + 2}`);
+  const handleNext = () => {
+    if (page < Math.ceil(questions.length / questionsPerPage)) {
+      navigate(`/seite/${page + 1}`);
     } else {
-      navigate('/auswertung');
+      navigate("/auswertung");
     }
   };
 
-  const prev = () => {
-    if (pageIndex > 0) {
-      navigate(`/seite/${pageIndex}`);
+  const handleBack = () => {
+    if (page > 1) {
+      navigate(`/seite/${page - 1}`);
     }
   };
 
   return (
-    <div className="p-10">
-      <h2 className="text-2xl font-bold text-bneGreen mb-6">
-        Fragebogen Seite {pageIndex + 1} von {totalPages}
-      </h2>
+    <div className="max-w-3xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6">Fragen – Seite {page}</h1>
 
-      {currentQuestions.map(q => (
-        <div key={q.id} className="mb-8">
-          <p className="mb-2 font-semibold">{q.text}</p>
-          <div className="flex justify-between max-w-xl">
-            {answerOptions.map(option => (
-              <label key={option.value} className="flex flex-col items-center cursor-pointer">
-                <input
-                  type="radio"
-                  name={q.id}
-                  value={option.value}
-                  checked={answers[q.id] === option.value}
-                  onChange={(e) => handleAnswer(q.id, e.target.value)}
-                  className="mb-1"
-                />
-                <span className="text-sm">{option.label}</span>
-              </label>
-            ))}
+      {currentQuestions.map((question, index) => {
+        const questionGlobalIndex = startIndex + index;
+        return (
+          <div key={questionGlobalIndex} className="mb-8">
+            <p className="mb-2 font-semibold text-xl">
+              {questionGlobalIndex + 1}. {question}
+            </p>
+            <QuestionSlider
+              value={responses[questionGlobalIndex] ?? 0}
+              onChange={(value) => handleSliderChange(questionGlobalIndex, value)}
+            />
           </div>
-        </div>
-      ))}
+        );
+      })}
 
-      <div className="flex justify-between mt-6">
-        <button
-          onClick={prev}
-          disabled={pageIndex === 0}
-          className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50"
-        >
-          Zurück
-        </button>
+      <div className="flex justify-between mt-8">
+        {page > 1 ? (
+          <button
+            onClick={handleBack}
+            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded"
+          >
+            Zurück
+          </button>
+        ) : (
+          <div></div>
+        )}
 
         <button
-          onClick={next}
-          disabled={!isComplete}
-          className="bg-bneGreen text-bneBeige px-4 py-2 rounded disabled:opacity-50"
+          onClick={handleNext}
+          className="bg-green-700 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded"
         >
-          {pageIndex < totalPages - 1 ? 'Weiter' : 'Zur Auswertung'}
+          {page < Math.ceil(questions.length / questionsPerPage)
+            ? "Weiter"
+            : "Zur Auswertung"}
         </button>
       </div>
     </div>
   );
-}
+};
+
+export default QuestionnairePage;
