@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   padding-top: 20px;
-  padding-bottom: 40px;
+  padding-bottom: 55px; /* Mehr Platz für Labels */
   user-select: none;
 }
 
@@ -40,7 +40,6 @@
   transition: background-color 0.3s ease;
 }
 
-/* Labels nebeneinander wie bisher (Desktop) */
 .labels-row {
   position: absolute;
   bottom: 0;
@@ -56,7 +55,7 @@
 .label {
   position: absolute;
   transform: translateX(-50%);
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   color: #256d24;
   font-weight: 600;
   white-space: nowrap;
@@ -64,23 +63,24 @@
   user-select: none;
 }
 
-/* Mobile: Labels untereinander anordnen */
-@media (max-width: 640px) {
-  .labels-row {
-    flex-direction: column;
-    align-items: flex-start;
-    height: auto;
-    position: static;
-    margin-top: 12px;
-    gap: 4px;
-  }
-  .label {
-    position: static !important;
-    transform: none !important;
-    font-size: 1rem;
-    margin-bottom: 0.2em;
-    white-space: normal;
-    text-align: left;
-  }
+.selected-label-mobile {
+  display: none;
+  margin: 10px 0 5px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #256d24;
+  text-align: left;
 }
 
+@media (max-width: 640px) {
+  .labels-row {
+    font-size: 0.65rem;
+    height: 25px;
+  }
+  .label {
+    font-size: 0.65rem;
+  }
+  .selected-label-mobile {
+    display: block;
+  }
+}

@@ -1,4 +1,3 @@
-// src/QuestionSlider.js
 import React from "react";
 import "./Slider.css";
 
@@ -26,7 +25,9 @@ const QuestionSlider = ({ value = 0, onChange }) => {
         }}
         aria-label={`Antwort auswählen: ${labels[value]}`}
       />
-      <div className="labels-row" aria-live="polite">
+      {/* Das gewählte Label als große Info darunter */}
+      <div className="selected-label-mobile">{labels[value]}</div>
+      <div className="labels-row">
         {labels.map((label, index) => (
           <div
             key={index}
