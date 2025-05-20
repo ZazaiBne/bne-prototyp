@@ -33,7 +33,7 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
           className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm mb-6"
         >
           <fieldset>
-            <legend className="font-semibold text-gray-800 mb-3 leading-relaxed text base md:text-lg">
+            <legend className="font-semibold text-gray-800 mb-3 leading-relaxed text-base md:text-lg">
               {q.id}. {q.text}
             </legend>
             <div className="space-y-2">
