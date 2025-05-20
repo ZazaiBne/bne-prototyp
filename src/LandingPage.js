@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "./logo-lra-muenchen.png";
 import banner from "./blumenbanner.jpg";
+import { Menu } from "lucide-react"; // Hamburger-Icon
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleStart = () => {
     navigate("/fragebogen");
@@ -14,33 +16,58 @@ const LandingPage = () => {
     <div className="min-h-screen bg-white text-gray-900 font-sans">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto flex items-center justify-start px-8 py-6 space-x-6">
-          <img
-            src={logo}
-            alt="Landratsamt München Logo"
-            className="h-24 w-auto md:h-28"
-          />
-          <span className="text-3xl md:text-4xl font-bold text-gray-900">
-            Landratsamt München
-          </span>
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+          {/* Logo links */}
+          <div className="flex items-center space-x-4">
+            <img
+              src={logo}
+              alt="Landratsamt München Logo"
+              className="h-20 w-auto md:h-24"
+            />
+            {/* Statt zweites „Landratsamt München“ → „BNE-Prototyp“ */}
+            <span className="hidden md:inline text-2xl md:text-3xl font-semibold text-gray-700">
+              BNE-Prototyp
+            </span>
+          </div>
+
+          {/* Hamburger-Menü mobil */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="text-gray-800"
+              aria-label="Menü öffnen"
+            >
+              <Menu size={32} />
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Dropdown-Menü */}
+        {menuOpen && (
+          <nav className="md:hidden bg-gray-100 shadow text-base font-medium text-gray-900">
+            <ul className="flex flex-col divide-y divide-gray-300">
+              <li className="px-6 py-3">Bürgerservice</li>
+              <li className="px-6 py-3">Themen</li>
+              <li className="px-6 py-3 text-blue-900">BNE</li>
+              <li className="px-6 py-3">Landkreis</li>
+              <li className="px-6 py-3">Kontakt</li>
+            </ul>
+          </nav>
+        )}
       </header>
 
-      {/* Bannerbild mit Navigation überlappt */}
+      {/* Bannerbild */}
       <div className="w-full relative">
         <div className="relative w-full">
           <img
             src={banner}
             alt="Blumenbanner Landkreis München"
             className="w-full object-cover"
-            style={{
-              height: "300px",
-              objectPosition: "right top",
-            }}
+            style={{ height: "300px", objectPosition: "right top" }}
           />
 
-          {/* Navigationsbalken */}
-          <nav className="absolute bottom-0 left-0 right-0 bg-gray-100 text-gray-900 text-lg md:text-xl font-semibold py-4 md:py-5 shadow-md">
+          {/* Desktop-Navigation */}
+          <nav className="hidden md:block absolute bottom-0 left-0 right-0 bg-gray-100 text-gray-900 text-lg md:text-xl font-semibold py-4 md:py-5 shadow-md">
             <div className="max-w-full flex justify-evenly px-4 md:px-10">
               <span className="hover:underline cursor-pointer">Bürgerservice</span>
               <span className="hover:underline cursor-pointer">Themen</span>
