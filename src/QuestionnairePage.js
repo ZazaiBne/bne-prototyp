@@ -1,49 +1,8 @@
+// src/QuestionnairePage.js
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import QuestionSlider from "./QuestionSlider";
-
-const questions = [
-  "Wie gut fördert Ihre Einrichtung nachhaltiges Denken?",
-  "Wie oft werden Themen wie Klimawandel oder Gerechtigkeit thematisiert?",
-  "Wie aktiv beteiligen sich die Teilnehmenden in Entscheidungsprozessen?",
-  "Gibt es Partnerschaften mit anderen Bildungseinrichtungen?",
-  "Wird in Ihrer Einrichtung ressourcenschonend gearbeitet?",
-  "Welche Rolle spielt Demokratiebildung im Alltag?",
-  "Werden kulturelle Unterschiede aktiv berücksichtigt?",
-  "Wie wird verantwortungsvolles Konsumverhalten gefördert?",
-  "Wie wird Medienkompetenz im Sinne nachhaltiger Entwicklung vermittelt?",
-  "Wie reflektieren die Fachkräfte ihr eigenes Verhalten?",
-  "Gibt es Projekte zu sozialem Engagement?",
-  "Wie wird mit Konflikten in der Gruppe umgegangen?",
-  "Werden globale Zusammenhänge thematisiert?",
-  "Werden außerschulische Lernorte genutzt?",
-  "Wie werden Kinder und Jugendliche zur Mitgestaltung ermutigt?",
-  "Gibt es eine langfristige BNE-Strategie?",
-  "Wie oft werden die Methoden reflektiert und angepasst?",
-  "Welche Rolle spielen Emotionen im Lernprozess?",
-  "Wie wird Kreativität im Sinne nachhaltiger Lösungen gefördert?",
-  "Werden die SDGs in der Bildungsarbeit sichtbar gemacht?",
-  "Wie divers ist das pädagogische Team?",
-  "Werden Benachteiligungen aktiv abgebaut?",
-  "Wie oft finden Fortbildungen zu BNE statt?",
-  "Wie transparent ist die Kommunikation in der Einrichtung?",
-  "Werden alternative Zukunftsszenarien besprochen?",
-  "Wie wird nachhaltige Mobilität gefördert?",
-  "Welche Rolle spielt Digitalisierung in der BNE?",
-  "Wie werden Eltern in die Arbeit einbezogen?",
-  "Gibt es Austausch mit internationalen Partnern?",
-  "Wie wird mit Fehlern umgegangen?",
-  "Werden Methoden der Zukunftswerkstätten eingesetzt?",
-  "Wie wird der Lernerfolg in BNE gemessen?",
-  "Gibt es eine Feedbackkultur?",
-  "Wie wird Eigenverantwortung gefördert?",
-  "Werden Aktivitäten regelmäßig dokumentiert?",
-  "Wie werden Zielkonflikte besprochen?",
-  "Wie werden die Themen Umwelt, Soziales, Ökonomie verknüpft?",
-  "Wie viel Gestaltungsspielraum haben Fachkräfte?",
-  "Werden auch unbequeme Themen offen angesprochen?",
-  "Wie oft werden externe Expert*innen eingeladen?"
-];
+import questions from "./Questionnaire";
 
 const questionsPerPage = 4;
 
@@ -75,8 +34,20 @@ const QuestionnairePage = ({ responses, setResponses }) => {
     }
   };
 
+  // Fortschritt berechnen
+  const totalAnswered = responses.filter(r => r > 0).length;
+  const progressPercent = Math.round((totalAnswered / questions.length) * 100);
+
   return (
     <div className="max-w-3xl mx-auto p-6">
+      {/* Fortschrittsbalken */}
+      <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+        <div
+          className="bg-bneGreen h-2.5 rounded-full transition-all duration-300"
+          style={{ width: `${progressPercent}%` }}
+        ></div>
+      </div>
+      <div className="text-sm text-gray-700 mb-2">Fragen beantwortet: {totalAnswered} / {questions.length}</div>
       <h1 className="text-2xl font-bold mb-6">Fragen – Seite {page}</h1>
 
       {currentQuestions.map((question, index) => {
@@ -84,7 +55,7 @@ const QuestionnairePage = ({ responses, setResponses }) => {
         return (
           <div key={questionGlobalIndex} className="mb-8">
             <p className="mb-2 font-semibold text-xl">
-              {questionGlobalIndex + 1}. {question}
+              {questionGlobalIndex + 1}. {question.text}
             </p>
             <QuestionSlider
               value={responses[questionGlobalIndex] ?? 0}
@@ -120,3 +91,4 @@ const QuestionnairePage = ({ responses, setResponses }) => {
 };
 
 export default QuestionnairePage;
+

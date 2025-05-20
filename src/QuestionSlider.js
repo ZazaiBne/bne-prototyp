@@ -1,3 +1,4 @@
+// src/QuestionSlider.js
 import React from "react";
 import "./Slider.css";
 
@@ -23,8 +24,9 @@ const QuestionSlider = ({ value = 0, onChange }) => {
         style={{
           backgroundSize: `${(value / (labels.length - 1)) * 100}% 100%`,
         }}
+        aria-label={`Antwort auswählen: ${labels[value]}`}
       />
-      <div className="labels-row">
+      <div className="labels-row" aria-live="polite">
         {labels.map((label, index) => (
           <div
             key={index}
@@ -40,4 +42,5 @@ const QuestionSlider = ({ value = 0, onChange }) => {
 };
 
 export default QuestionSlider;
+
 
