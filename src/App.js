@@ -16,10 +16,21 @@ function App() {
 
   return (
     <Router>
-      <div className="flex min-h-screen bg-bneBeige text-gray-800">
-        <Sidebar />
-        <MobileMenu />
-        <main className="flex-grow md:ml-64 p-8">
+      <div className="min-h-screen bg-bneBeige text-gray-800">
+        
+        {/* Navigation */}
+        {/* Desktop Sidebar */}
+        <div className="hidden md:block fixed top-0 left-0 h-full w-64 z-40">
+          <Sidebar />
+        </div>
+
+        {/* Mobile Hamburger-Menü */}
+        <div className="md:hidden">
+          <MobileMenu />
+        </div>
+
+        {/* Hauptinhalt */}
+        <main className="md:ml-64 p-4 pt-6 md:pt-10">
           <Routes>
             <Route path="/" element={<Navigate to="/fragebogen" replace />} />
             <Route
@@ -52,7 +63,11 @@ function Kontakt() {
   return (
     <div>
       <h2 className="text-2xl font-bold text-bneGreen mb-4">✉️ Kontakt</h2>
-      <p>Du kannst uns per E-Mail erreichen: <a href="mailto:kontakt@beispiel.de" className="text-blue-600 underline">kontakt@beispiel.de</a></p>
+      <p>Du kannst uns per E-Mail erreichen:{" "}
+        <a href="mailto:kontakt@beispiel.de" className="text-blue-600 underline">
+          kontakt@beispiel.de
+        </a>
+      </p>
     </div>
   );
 }
@@ -76,7 +91,7 @@ function Auswertung({ responses, setResponses }) {
     <div>
       <h2 className="text-2xl font-bold text-bneGreen mb-4">🎉 Vielen Dank!</h2>
       <p>Hier wird die Auswertung des Fragebogens angezeigt.</p>
-      <pre>{JSON.stringify(responses, null, 2)}</pre>
+      <pre className="bg-white rounded p-4 text-sm">{JSON.stringify(responses, null, 2)}</pre>
       <button onClick={handleRestart} className="mt-4 bg-bneGreen text-bneBeige px-4 py-2 rounded">
         🔁 Fragebogen neu starten
       </button>
@@ -85,5 +100,4 @@ function Auswertung({ responses, setResponses }) {
 }
 
 export default App;
-
 
