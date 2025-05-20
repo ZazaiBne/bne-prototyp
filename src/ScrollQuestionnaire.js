@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import questions from "./Questionnaire";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ const options = [
 
 const ScrollQuestionnaire = ({ responses, setResponses }) => {
   const navigate = useNavigate();
+  const topRef = useRef(null);
 
   const handleChange = (index, value) => {
     const updated = [...responses];
@@ -20,13 +21,40 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
   };
 
   const handleSubmit = () => {
+    const unanswered = responses.findIndex((r) => r === 0);
+    if (unanswered !== -1) {
+      topRef.current?.scrollIntoView({ behavior: "smooth" });
+      alert(`Bitte beantworte alle Fragen. Es fehlen noch Frage ${unanswered + 1}.`);
+      return;
+    }
     navigate("/auswertung");
   };
 
+  const answeredCount = responses.filter((r) => r > 0).length;
+  const progressPercent = Math.round((answeredCount / questions.length) * 100);
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-6 bg-bneBeige min-h-screen">
-      <h1 className="text-2xl font-bold text-bneGreen mb-6">📋 Fragebogen – Bildung für nachhaltige Entwicklung</h1>
+      <div ref={topRef} />
+      <h1 className="text-2xl font-bold text-bneGreen mb-4">
+        📋 Fragebogen – Bildung für nachhaltige Entwicklung
+      </h1>
 
+      {/* Fortschrittsanzeige sticky */}
+<div className="sticky top-0 z-20 bg-bneBeige pt-2 pb-4 mb-6 shadow-sm">
+
+        <div className="text-sm text-gray-700 mb-1">
+          Beantwortet: {answeredCount} / {questions.length}
+        </div>
+        <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            className="h-3 bg-bneGreen transition-all"
+            style={{ width: `${progressPercent}%` }}
+          ></div>
+        </div>
+      </div>
+
+      {/* Fragenliste */}
       {questions.map((q, i) => (
         <section
           key={q.id}
@@ -36,7 +64,7 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
             <legend className="font-semibold text-gray-800 mb-3 leading-relaxed text-base md:text-lg">
               {q.id}. {q.text}
             </legend>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {options.map((label, idx) => (
                 <label key={idx} className="block">
                   <input
@@ -54,10 +82,16 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
         </section>
       ))}
 
+      {/* Absenden */}
       <div className="text-right mt-10">
         <button
           onClick={handleSubmit}
-          className="bg-bneGreen text-bneBeige px-6 py-3 rounded hover:bg-green-700 transition"
+          disabled={answeredCount < questions.length}
+          className={`px-6 py-3 rounded transition font-medium ${
+            answeredCount < questions.length
+              ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+              : "bg-bneGreen text-bneBeige hover:bg-green-700"
+          }`}
         >
           🧾 Auswertung anzeigen
         </button>
@@ -67,3 +101,4 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
 };
 
 export default ScrollQuestionnaire;
+
