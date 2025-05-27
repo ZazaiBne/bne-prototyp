@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import LandingPage from "./LandingPage";
 import BNEPage from "./BNEPage";
 import MetaInfoPage from "./MetaInfoPage";
@@ -7,9 +7,6 @@ import ScrollQuestionnaire from "./ScrollQuestionnaire";
 import Sidebar from "./Sidebar";
 import MobileMenu from "./MobileMenu";
 import Auswertung from "./Auswertung";
-import Newsletter from "./Newsletter";
-import Kontakt from "./Kontakt";
-import Vorschlag from "./Vorschlag";
 import Flipcards from "./Flipcards";
 
 function AppWrapper() {
@@ -24,20 +21,18 @@ function AppWrapper() {
 
   const location = useLocation();
   const showSidebar = location.pathname === "/fragebogen";
-  const showMobileMenu = !showSidebar;
 
   return (
     <div className="min-h-screen bg-bneBeige text-gray-800">
       {showSidebar && (
-        <div className="hidden md:block fixed top-0 left-0 h-full w-64 z-40">
-          <Sidebar />
-        </div>
-      )}
-
-      {showMobileMenu && (
-        <div className="md:hidden">
-          <MobileMenu />
-        </div>
+        <>
+          <div className="hidden md:block fixed top-0 left-0 h-full w-64 z-40">
+            <Sidebar />
+          </div>
+          <div className="md:hidden">
+            <MobileMenu />
+          </div>
+        </>
       )}
 
       <main className={showSidebar ? "md:ml-64 p-4 pt-6 md:pt-10" : "p-4"}>
@@ -55,10 +50,7 @@ function AppWrapper() {
             }
           />
           <Route path="/auswertung" element={<Auswertung responses={responses} />} />
-          <Route path="/newsletter" element={<Newsletter />} />
-          <Route path="/kontakt" element={<Kontakt />} />
-          <Route path="/vorschlag" element={<Vorschlag />} />
-          <Route path="/flipcards" element={<Flipcards />} />
+          <Route path="/flipcards" element={<Flipcards />} /> {/* ✅ Neue Route */}
           <Route
             path="*"
             element={
