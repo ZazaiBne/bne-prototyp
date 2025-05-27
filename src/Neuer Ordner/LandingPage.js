@@ -30,43 +30,10 @@ const LandingPage = () => {
               BNE-Prototyp
             </span>
           </div>
-
-          {/* Hamburger-Menü (nur mobil sichtbar) */}
-          <div className="md:hidden relative" ref={dropdownRef}>
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="text-3xl"
-              aria-label="Menü öffnen"
-            >
-              ☰
-            </button>
-            {dropdownOpen && (
-              <div className="absolute right-0 mt-2 bg-white border border-gray-300 rounded shadow z-50 w-64">
-                <span
-                  onClick={() => {
-                    navigate("/bne");
-                    setDropdownOpen(false);
-                  }}
-                  className="block px-4 py-3 hover:bg-gray-100 cursor-pointer"
-                >
-                  Bildung für nachhaltige Entwicklung
-                </span>
-                <span className="block px-4 py-3 hover:bg-gray-100 cursor-pointer">
-                  Bürgerservice
-                </span>
-                <span className="block px-4 py-3 hover:bg-gray-100 cursor-pointer">
-                  Landkreis
-                </span>
-                <span className="block px-4 py-3 hover:bg-gray-100 cursor-pointer">
-                  Kontakt
-                </span>
-              </div>
-            )}
-          </div>
         </div>
       </header>
 
-      {/* Banner + Navigation (nur Desktop sichtbar) */}
+      {/* Banner + Navigation */}
       <div className="relative">
         <img
           src={banner}
