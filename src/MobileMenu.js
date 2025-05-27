@@ -19,6 +19,20 @@ export default function MobileMenu() {
         <div className="w-full bg-white shadow-md animate-slide-down border-t border-gray-100">
           <nav className="flex flex-col divide-y divide-gray-100">
             <Link
+              to="/"
+              onClick={() => setOpen(false)}
+              className="px-4 py-3 hover:bg-bneBeige"
+            >
+              🏠 Startseite
+            </Link>
+            <Link
+              to="/bne"
+              onClick={() => setOpen(false)}
+              className="px-4 py-3 hover:bg-bneBeige"
+            >
+              📚 Themen
+            </Link>
+            <Link
               to="/newsletter"
               onClick={() => setOpen(false)}
               className="px-4 py-3 hover:bg-bneBeige"
