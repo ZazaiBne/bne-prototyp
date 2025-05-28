@@ -26,7 +26,7 @@ const BNEPage = () => {
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center space-x-4">
             <img src={logo} alt="Logo" className="h-20 md:h-24 w-auto" />
-            <span className="text-sm md:text-3xl font-semibold text-gray-700 z-10">
+            <span className="text-[10px] md:text-3xl font-semibold text-gray-700 z-10">
               BNE-Prototyp
             </span>
           </div>
