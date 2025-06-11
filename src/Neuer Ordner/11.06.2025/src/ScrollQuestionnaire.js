@@ -1,4 +1,3 @@
-// src/ScrollQuestionnaire.js
 import React, { useRef } from "react";
 import questions from "./Questionnaire";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +21,13 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
   };
 
   const handleSubmit = () => {
-    navigate("/auswertung"); // kein Zwang mehr zur Vollständigkeit
+    const unanswered = responses.findIndex((r) => r === 0);
+    if (unanswered !== -1) {
+      topRef.current?.scrollIntoView({ behavior: "smooth" });
+      alert(`Bitte beantworte alle Fragen. Es fehlen noch Frage ${unanswered + 1}.`);
+      return;
+    }
+    navigate("/auswertung");
   };
 
   const answeredCount = responses.filter((r) => r > 0).length;
@@ -35,8 +40,9 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
         📋 Fragebogen – Bildung für nachhaltige Entwicklung
       </h1>
 
-      {/* Fortschrittsanzeige */}
-      <div className="sticky top-0 z-20 bg-bneBeige pt-2 pb-4 mb-6 shadow-sm">
+      {/* Fortschrittsanzeige sticky */}
+<div className="sticky top-0 z-20 bg-bneBeige pt-2 pb-4 mb-6 shadow-sm">
+
         <div className="text-sm text-gray-700 mb-1">
           Beantwortet: {answeredCount} / {questions.length}
         </div>
@@ -80,7 +86,12 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
       <div className="text-right mt-10">
         <button
           onClick={handleSubmit}
-          className="px-6 py-3 rounded bg-bneGreen text-white hover:bg-green-700 transition font-medium"
+          disabled={answeredCount < questions.length}
+          className={`px-6 py-3 rounded transition font-medium ${
+            answeredCount < questions.length
+              ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+              : "bg-bneGreen text-bneBeige hover:bg-green-700"
+          }`}
         >
           🧾 Auswertung anzeigen
         </button>
@@ -90,5 +101,4 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
 };
 
 export default ScrollQuestionnaire;
-
 

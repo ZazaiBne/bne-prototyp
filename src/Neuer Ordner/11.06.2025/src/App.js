@@ -1,6 +1,5 @@
-// src/App.js
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import LandingPage from "./LandingPage";
 import BNEPage from "./BNEPage";
 import MetaInfoPage from "./MetaInfoPage";
@@ -11,7 +10,15 @@ import Auswertung from "./Auswertung";
 import Flipcards from "./Flipcards";
 
 function AppWrapper() {
-  const [responses, setResponses] = useState(Array(36).fill(0)); // immer neu starten
+  const [responses, setResponses] = useState(() => {
+    const saved = localStorage.getItem("bneResponses");
+    return saved ? JSON.parse(saved) : Array(40).fill(0);
+  });
+
+  useEffect(() => {
+    localStorage.setItem("bneResponses", JSON.stringify(responses));
+  }, [responses]);
+
   const location = useLocation();
   const showSidebar = location.pathname === "/fragebogen";
 
@@ -43,7 +50,7 @@ function AppWrapper() {
             }
           />
           <Route path="/auswertung" element={<Auswertung responses={responses} />} />
-          <Route path="/flipcards" element={<Flipcards />} />
+          <Route path="/flipcards" element={<Flipcards />} /> {/* ✅ Neue Route */}
           <Route
             path="*"
             element={
