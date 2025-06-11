@@ -9,11 +9,19 @@ import Sidebar from "./Sidebar";
 import MobileMenu from "./MobileMenu";
 import Auswertung from "./Auswertung";
 import Flipcards from "./Flipcards";
+import KontaktPage from "./KontaktPage";
 
 function AppWrapper() {
-  const [responses, setResponses] = useState(Array(36).fill(0)); // immer neu starten
+  const [responses, setResponses] = useState(Array(36).fill(0));
   const location = useLocation();
-  const showSidebar = location.pathname === "/fragebogen";
+
+  // Sidebar anzeigen auf bestimmten Seiten
+  const showSidebar = [
+    "/fragebogen",
+    "/meta",
+    "/kontakt",
+    "/auswertung"
+  ].includes(location.pathname);
 
   return (
     <div className="min-h-screen bg-bneBeige text-gray-800">
@@ -44,6 +52,7 @@ function AppWrapper() {
           />
           <Route path="/auswertung" element={<Auswertung responses={responses} />} />
           <Route path="/flipcards" element={<Flipcards />} />
+          <Route path="/kontakt" element={<KontaktPage />} />
           <Route
             path="*"
             element={

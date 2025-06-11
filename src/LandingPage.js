@@ -65,7 +65,7 @@ const LandingPage = () => {
                           setMenuOpen(false);
                           setSubMenuOpen(false);
                         }}
-                        className="block px-4 py-3 hover:bg-gray-100 cursor-pointer text-sm"
+                        className="block px-4 py-3 hover:bg-gray-100 cursor-pointer whitespace-nowrap"
                       >
                         Bildung für nachhaltige Entwicklung
                       </span>
@@ -107,13 +107,13 @@ const LandingPage = () => {
               Themen ▾
             </div>
             {desktopDropdownOpen && (
-              <div className="absolute left-0 mt-2 bg-white border border-gray-300 rounded shadow z-50 w-80">
+              <div className="absolute left-0 mt-2 bg-white border border-gray-300 rounded shadow z-50 min-w-[300px]">
                 <div
                   onClick={() => {
                     navigate("/bne");
                     setDesktopDropdownOpen(false);
                   }}
-                  className="block px-4 py-3 hover:bg-gray-100 cursor-pointer"
+                  className="block px-4 py-3 hover:bg-gray-100 cursor-pointer whitespace-nowrap"
                 >
                   Bildung für nachhaltige Entwicklung
                 </div>
@@ -136,6 +136,20 @@ const LandingPage = () => {
           sichtbarer und zugänglicher zu machen.
         </p>
       </main>
+
+      {/* Förderlogos + Text */}
+      <footer className="max-w-5xl mx-auto px-6 pb-16 text-center text-sm text-gray-600">
+        <p className="mb-4">
+          Das Projekt wird im Rahmen des Programms <strong>„Bildungskommunen“</strong> durch das
+          Bundesministerium für Bildung und Forschung und die Europäische Union über den Europäischen
+          Sozialfonds Plus (ESF Plus) gefördert.
+        </p>
+        <div className="flex flex-wrap justify-center items-center gap-6">
+          <img src="/logos/eu.jpg" alt="EU" className="h-16 object-contain" />
+          <img src="/logos/bmbf.jpg" alt="BMBF" className="h-16 object-contain" />
+          <img src="/logos/bildungskommunen.jpg" alt="Bildungskommunen" className="h-16 object-contain" />
+        </div>
+      </footer>
     </div>
   );
 };

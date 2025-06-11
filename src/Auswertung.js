@@ -20,7 +20,7 @@ const Auswertung = ({ responses }) => {
 Wenn Sie möchten, können Sie sich auch hier unten ein kurzes Video anschauen, das einige Gedanken zur Vertiefung bietet.
     </p>
     <a
-      href="https://youtu.be/ZygtMuqKO3A?si=GBFzYv5WH-BNswaw"
+      href="https://videos.simpleshow.com/O3SbwpqR0Q"
       target="_blank"
       rel="noopener noreferrer"
       className="inline-block bg-yellow-500 text-white font-semibold px-4 py-2 rounded hover:bg-yellow-600 transition"

@@ -54,13 +54,13 @@ const BNEPage = () => {
               Themen ▾
             </div>
             {desktopDropdownOpen && (
-              <div className="absolute left-0 mt-2 bg-white border border-gray-300 rounded shadow z-50 w-80">
+              <div className="absolute left-0 mt-2 bg-white border border-gray-300 rounded shadow z-50 min-w-[300px]">
                 <div
                   onClick={() => {
                     navigate("/bne");
                     setDesktopDropdownOpen(false);
                   }}
-                  className="block px-4 py-3 hover:bg-gray-100 cursor-pointer"
+                  className="block px-4 py-3 hover:bg-gray-100 cursor-pointer whitespace-nowrap"
                 >
                   Bildung für nachhaltige Entwicklung
                 </div>
