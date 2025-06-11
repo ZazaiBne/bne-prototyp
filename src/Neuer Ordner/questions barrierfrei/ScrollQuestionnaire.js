@@ -50,39 +50,32 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
 
       {/* Fragenliste */}
       {questions.map((q, i) => (
-        <div key={q.id}>
-          {i % 12 === 0 && i !== 0 && (
-            <hr className="my-8 border-gray-300" />
-          )}
-
-          <section
-            className={`border border-gray-200 p-4 rounded-xl shadow-sm mb-6 ${
-              i % 2 === 0 ? "bg-white" : "bg-gray-50"
-            }`}
-          >
-            <fieldset>
-              <legend className="font-semibold text-gray-800 mb-3 leading-relaxed text-base md:text-lg">
-                {q.id}. {q.text}
-              </legend>
-              <div className="space-y-3">
-                {options.map((label, idx) => (
-                  <div key={idx}>
-                    <label className="inline-flex items-center">
-                      <input
-                        type="radio"
-                        name={`frage-${q.id}`}
-                        className="mr-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
-                        checked={responses[i] === idx + 1}
-                        onChange={() => handleChange(i, idx + 1)}
-                      />
-                      {label}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </fieldset>
-          </section>
-        </div>
+        <section
+          key={q.id}
+          className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm mb-6"
+        >
+          <fieldset>
+            <legend className="font-semibold text-gray-800 mb-3 leading-relaxed text-base md:text-lg">
+              {q.id}. {q.text}
+            </legend>
+            <div className="space-y-3">
+              {options.map((label, idx) => (
+                <div key={idx}>
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name={`frage-${q.id}`}
+                      className="mr-2"
+                      checked={responses[i] === idx + 1}
+                      onChange={() => handleChange(i, idx + 1)}
+                    />
+                    {label}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </fieldset>
+        </section>
       ))}
 
       {/* Absenden */}
@@ -99,7 +92,6 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
 };
 
 export default ScrollQuestionnaire;
-
 
 
 
