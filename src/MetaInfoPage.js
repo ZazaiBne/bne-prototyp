@@ -1,5 +1,5 @@
 // src/MetaInfoPage.js
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const kommunen = [
@@ -19,20 +19,20 @@ const MetaInfoPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-bneBeige text-gray-800 px-6 py-16">
-      <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-3xl font-bold text-bneGreen mb-6 flex items-center gap-2">
+    <div className="min-h-screen bg-bneBeige text-gray-800 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-3xl font-bold text-bneGreen mb-4 flex items-center gap-2">
           🧾 Meta-Informationen zum BNE-Prototyp
         </h1>
 
-        <div className="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-4 mb-8 rounded">
+        <p className="text-gray-700 text-sm sm:text-base italic mb-8">
           Diese Angaben sind freiwillig und dienen ausschließlich der anonymen Auswertung nach Tätigkeitsfeld und Zielgruppen.
-        </div>
+        </p>
 
-        <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); handleContinue(); }}>
+        <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); handleContinue(); }}>
           {/* 1. Rolle */}
           <div>
-            <label htmlFor="rolle" className="font-semibold block mb-2">
+            <label htmlFor="rolle" className="font-semibold block mb-1">
               1. Welche Rolle trifft am besten auf Sie zu?
             </label>
             <select id="rolle" name="rolle" className="w-full p-2 border rounded mb-2" defaultValue="">
@@ -43,10 +43,8 @@ const MetaInfoPage = () => {
               <option>Leitung</option>
               <option>Koordination</option>
             </select>
-            <label htmlFor="andereRolle" className="sr-only">Andere Rolle (optional)</label>
             <input
               type="text"
-              id="andereRolle"
               name="andereRolle"
               placeholder="Andere Rolle (optional)"
               className="w-full p-2 border rounded"
@@ -55,7 +53,7 @@ const MetaInfoPage = () => {
 
           {/* 2. Bereich */}
           <div>
-            <label htmlFor="bereich" className="font-semibold block mb-2">
+            <label htmlFor="bereich" className="font-semibold block mb-1">
               2. In welchem Bereich sind Sie beruflich tätig?
             </label>
             <select id="bereich" name="bereich" className="w-full p-2 border rounded mb-2" defaultValue="">
@@ -66,10 +64,8 @@ const MetaInfoPage = () => {
               <option>Volkshochschule</option>
               <option>Offene Kinder- und Jugendarbeit</option>
             </select>
-            <label htmlFor="andererBereich" className="sr-only">Anderer Bereich (optional)</label>
             <input
               type="text"
-              id="andererBereich"
               name="andererBereich"
               placeholder="Anderer Bereich (optional)"
               className="w-full p-2 border rounded"
@@ -78,7 +74,7 @@ const MetaInfoPage = () => {
 
           {/* 3. Altersgruppe */}
           <div>
-            <label htmlFor="altersgruppe" className="font-semibold block mb-2">
+            <label htmlFor="altersgruppe" className="font-semibold block mb-1">
               3. Mit welcher Altersgruppe arbeiten Sie hauptsächlich?
             </label>
             <select id="altersgruppe" name="altersgruppe" className="w-full p-2 border rounded" defaultValue="">
@@ -95,7 +91,7 @@ const MetaInfoPage = () => {
 
           {/* 4. Sitz der Organisation */}
           <div>
-            <label htmlFor="sitz" className="font-semibold block mb-2">
+            <label htmlFor="sitz" className="font-semibold block mb-1">
               4. Sitz Ihrer Organisation:
             </label>
             <select id="sitz" name="sitz" className="w-full p-2 border rounded" defaultValue="">
@@ -108,7 +104,7 @@ const MetaInfoPage = () => {
 
           {/* 5. Tätigkeitsort */}
           <div>
-            <label htmlFor="aktiv" className="font-semibold block mb-2">
+            <label htmlFor="aktiv" className="font-semibold block mb-1">
               5. Wo ist Ihre Organisation aktiv tätig?
             </label>
             <select id="aktiv" name="aktiv" className="w-full p-2 border rounded" defaultValue="">
