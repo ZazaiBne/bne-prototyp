@@ -17,50 +17,27 @@ export default function MobileMenu() {
       {/* Dropdown-Menü */}
       {open && (
         <div className="w-full bg-white shadow-md animate-slide-down border-t border-gray-100">
-          <nav className="flex flex-col divide-y divide-gray-100">
-            <Link
-              to="/"
-              onClick={() => setOpen(false)}
-              className="px-4 py-3 hover:bg-bneBeige"
-            >
+          <nav className="flex flex-col divide-y divide-gray-100 text-gray-800 font-medium">
+            <Link to="/" onClick={() => setOpen(false)} className="px-4 py-3 hover:bg-bneBeige">
               🏠 Startseite
             </Link>
-            <Link
-              to="/bne"
-              onClick={() => setOpen(false)}
-              className="px-4 py-3 hover:bg-bneBeige"
-            >
+            <Link to="/bne" onClick={() => setOpen(false)} className="px-4 py-3 hover:bg-bneBeige">
               📚 Themen
             </Link>
-            <Link
-              to="/newsletter"
-              onClick={() => setOpen(false)}
-              className="px-4 py-3 hover:bg-bneBeige"
-            >
-              📥 Newsletter
-            </Link>
             <a
-              href="/flyer.pdf"
+              href="/newsletter.pdf"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="px-4 py-3 hover:bg-bneBeige"
             >
-              📄 Flyer
+              📥 Newsletter
             </a>
-            <Link
-              to="/kontakt"
-              onClick={() => setOpen(false)}
-              className="px-4 py-3 hover:bg-bneBeige"
-            >
+            <Link to="/kontakt" onClick={() => setOpen(false)} className="px-4 py-3 hover:bg-bneBeige">
               ✉️ Kontakt
             </Link>
-            <Link
-              to="/vorschlag"
-              onClick={() => setOpen(false)}
-              className="px-4 py-3 hover:bg-bneBeige"
-            >
-              ➕ Vorschlagen
+            <Link to="/lerneinheiten" onClick={() => setOpen(false)} className="px-4 py-3 hover:bg-bneBeige">
+              ➕ Lerneinheiten
             </Link>
           </nav>
         </div>
