@@ -16,7 +16,7 @@ const Auswertung = ({ responses }) => {
     <p className="mb-3 text-yellow-900">
       Vielen Dank für Ihre Teilnahme!
       <br />
-      Im Menü finden Sie weitere Informationen rund um Bildung für nachhaltige Entwicklung (BNE), darunter unseren Newsletter zum Herunterladen sowie zusätzliche Materialien wie Texte und Videos.
+      Im Menü finden Sie weitere Informationen rund um Bildung für nachhaltige Entwicklung (BNE) – darunter Flyer und unseren Newsletter zum Herunterladen sowie zusätzliche Materialien wie Texte und Videos.
 Wenn Sie möchten, können Sie sich auch hier unten ein kurzes Video anschauen, das einige Gedanken zur Vertiefung bietet.
     </p>
     <a

@@ -9,6 +9,7 @@ const BNEPage = () => {
   const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
   const desktopRef = useRef();
 
+  // Klick außerhalb schließt Menü
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (desktopRef.current && !desktopRef.current.contains(e.target)) {
@@ -20,7 +21,7 @@ const BNEPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
+    <div className="min-h-screen bg-white text-gray-900 font-sans">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 shadow-sm relative z-30">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
@@ -33,16 +34,18 @@ const BNEPage = () => {
         </div>
       </header>
 
-      {/* Banner + Navigation */}
+      {/* Banner + Desktop Navigation */}
       <div className="relative z-10">
         <img
           src={banner}
           alt="Banner"
           className="w-full object-cover"
-          style={{ height: "180px", objectPosition: "right top" }}
+          style={{ height: "300px", objectPosition: "right top" }}
         />
         <nav className="hidden md:flex absolute bottom-0 left-0 right-0 bg-gray-100 text-gray-900 text-lg font-semibold py-4 shadow-md justify-evenly px-10 z-20">
           <span className="hover:underline cursor-pointer">Bürgerservice</span>
+
+          {/* Themen mit Klick-Dropdown */}
           <div className="relative" ref={desktopRef}>
             <div
               className="hover:underline cursor-pointer"
@@ -64,52 +67,35 @@ const BNEPage = () => {
               </div>
             )}
           </div>
+
           <span className="hover:underline cursor-pointer">Landkreis</span>
           <span className="hover:underline cursor-pointer">Kontakt</span>
         </nav>
       </div>
 
-      {/* Hero-Bild mit Titeloverlay */}
-      <div className="relative w-full h-[200px] mb-12">
-        <img
-          src="/bnepagebild.jpg"
-          alt="Titelbild BNE"
-          className="w-full h-full object-cover shadow"
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-          <h1 className="text-white text-3xl md:text-4xl font-semibold text-center">
-            Bildung für nachhaltige Entwicklung (BNE)
-          </h1>
-        </div>
-      </div>
+      {/* Hauptinhalt */}
+      <main className="max-w-4xl mx-auto px-6 py-16 text-center">
+        <h2 className="text-3xl font-semibold text-blue-900 mb-4">
+          Bildung für nachhaltige Entwicklung (BNE)
+        </h2>
+        <p className="mb-8 text-gray-800 leading-relaxed">
+          Wie nachhaltig ist Ihre pädagogische Arbeit bereits? Finden Sie es heraus!
+Unser Fragebogen hilft dabei, den aktuellen Stand des nachhaltigen Handelns in Ihrer Einrichtung zu erfassen – ganz einfach, anonym und praxisnah.
+Sie beantworten Fragen zu verschiedenen Themenfeldern, die indirekt Aspekte nachhaltiger Bildungsarbeit berühren.
 
-      {/* Inhalt */}
-      <main className="max-w-4xl mx-auto px-6 pb-16">
-        <div className="text-gray-800 leading-relaxed text-justify space-y-5">
-          <p>
-            Wie nachhaltig ist Ihre pädagogische Arbeit bereits? Finden Sie es heraus!
-            Unser Fragebogen hilft dabei, den aktuellen Stand des nachhaltigen Handelns in Ihrer Einrichtung zu erfassen – ganz einfach, anonym und praxisnah.
-          </p>
-          <p>
-            Sie beantworten Fragen zu verschiedenen Themenfeldern, die indirekt Aspekte nachhaltiger Bildungsarbeit berühren. 
-            Der Fragebogen ist in vier Teile eingeteilt: allgemeine Fragen zu Ihnen und Ihrer Einrichtung, soziale Nachhaltigkeit, 
-            ökologische Nachhaltigkeit und ökonomische Nachhaltigkeit.
-          </p>
-          <p>
-            Es stehen immer die gleichen Antwortmöglichkeiten zur Verfügung: trifft zu, trifft eher zu, teils-teils, trifft eher nicht zu und trifft nicht zu. 
-            So können wir anhand der Likertskala eine einheitliche Auswertung ermöglichen.
-          </p>
-          <p>
-            Die Ergebnisse fließen in ein Monitoring des Landratsamts München ein. So entsteht ein Überblick über vorhandene Stärken – 
-            und dort, wo noch Potenzial besteht, setzen wir an.
-          </p>
-          <p>
-            Das Beste: Im Anschluss erhalten Sie passende Impulse zur Vertiefung. Los geht’s! Ihre Erfahrungen zählen!
-          </p>
-        </div>
+Wie funktioniert das Ganze?
+Der Fragebogen ist in vier Teile eingeteilt: allgemeine Fragen zu Ihnen und Ihrer Einrichtung, soziale Nachhaltigkeit, ökologische Nachhaltigkeit und ökonomische Nachhaltigkeit. Es stehen immer die gleichen Antwortmöglichkeiten zur Verfügung: trifft zu, trifft eher zu, teils-teils, trifft eher nicht zu und trifft zu. So können wir anhand der Likertskala eine einheitliche Auswertung ermöglichen.
+
+Warum das Ganze?
+Die Ergebnisse fließen in ein Monitoring des Landratsamts München ein. So entsteht ein Überblick über vorhandene Stärken – und dort, wo noch Potenzial besteht, setzen wir an.
+
+Das Beste: Im Anschluss erhalten Sie passende Impulse zur Vertiefung.
+
+Los geht’s! Ihre Erfahrungen zählen!
+        </p>
 
         {/* Buttons */}
-        <div className="mt-10 flex flex-col md:flex-row justify-center gap-4">
+        <div className="flex flex-col md:flex-row justify-center gap-4">
           <button
             onClick={() => navigate("/meta")}
             className="bg-blue-900 text-white px-6 py-3 rounded hover:bg-blue-800 transition font-medium"
@@ -128,10 +114,10 @@ const BNEPage = () => {
         </div>
 
         {/* Trennung */}
-        <hr className="my-16 border-gray-300" />
+        <hr className="my-10 border-gray-300" />
 
-        {/* Newsletter abonnieren */}
-        <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow text-left">
+        {/* Newsletter abonnieren (nur UI) */}
+        <div className="max-w-md mx-auto text-left">
           <h3 className="text-lg font-semibold mb-2 text-gray-800">
             📬 Newsletter abonnieren
           </h3>
@@ -155,7 +141,6 @@ const BNEPage = () => {
 };
 
 export default BNEPage;
-
 
 
 

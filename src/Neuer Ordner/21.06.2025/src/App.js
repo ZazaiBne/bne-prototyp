@@ -10,7 +10,6 @@ import MobileMenu from "./MobileMenu";
 import Auswertung from "./Auswertung";
 import Flipcards from "./Flipcards";
 import KontaktPage from "./KontaktPage";
-import LerneinheitenPage from "./LerneinheitenPage"; // ✅ hinzugefügt
 
 function AppWrapper() {
   const [responses, setResponses] = useState(Array(36).fill(0));
@@ -54,8 +53,6 @@ function AppWrapper() {
           <Route path="/auswertung" element={<Auswertung responses={responses} />} />
           <Route path="/flipcards" element={<Flipcards />} />
           <Route path="/kontakt" element={<KontaktPage />} />
-          <Route path="/lerneinheiten" element={<LerneinheitenPage />} /> {/* ✅ neue Route */}
-
           <Route
             path="*"
             element={

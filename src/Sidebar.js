@@ -1,49 +1,49 @@
 // src/Sidebar.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <div className="hidden md:block w-64 min-h-screen bg-bneGreen text-bneBeige p-6 fixed left-0 top-0">
-      <h2 className="text-2xl font-bold mb-8">📘 Menü</h2>
+    <aside className="hidden md:flex flex-col w-64 min-h-screen bg-bneGreen text-bneBeige p-6 fixed left-0 top-0 shadow-lg">
+      <h2 className="text-2xl font-bold mb-10 flex items-center gap-2">
+        📘 Menü
+      </h2>
 
-      <nav className="space-y-4" aria-label="Hauptmenü">
-        {/* Newsletter als PDF (funktioniert wie Flyer) */}
+      <nav className="space-y-6 text-base font-medium" aria-label="Hauptmenü">
+        <Link
+          to="/"
+          className="block px-3 py-2 rounded hover:bg-bneBeige hover:text-bneGreen focus:outline-none focus:ring-2 focus:ring-bneBeige transition"
+        >
+          🏠 Startseite
+        </Link>
+
         <a
           href="/newsletter.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="block hover:underline focus:outline-none focus:ring-2 focus:ring-bneBeige rounded"
+          className="block px-3 py-2 rounded hover:bg-bneBeige hover:text-bneGreen focus:outline-none focus:ring-2 focus:ring-bneBeige transition"
         >
           📥 Newsletter
         </a>
 
-        {/* Flyer als PDF */}
-        <a
-          href="/flyer.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block hover:underline focus:outline-none focus:ring-2 focus:ring-bneBeige rounded"
-        >
-          📄 Flyer
-        </a>
-
-        {/* Kontaktseite */}
         <Link
           to="/kontakt"
-          className="block hover:underline focus:outline-none focus:ring-2 focus:ring-bneBeige rounded"
+          className="block px-3 py-2 rounded hover:bg-bneBeige hover:text-bneGreen focus:outline-none focus:ring-2 focus:ring-bneBeige transition"
         >
           ✉️ Kontakt
         </Link>
 
-        {/* Vorschlagsseite */}
         <Link
-          to="/vorschlag"
-          className="block hover:underline focus:outline-none focus:ring-2 focus:ring-bneBeige rounded"
+          to="/lerneinheiten"
+          className="block px-3 py-2 rounded hover:bg-bneBeige hover:text-bneGreen focus:outline-none focus:ring-2 focus:ring-bneBeige transition"
         >
-          ➕ Vorschlagen
+          ➕ Lerneinheiten
         </Link>
       </nav>
-    </div>
+
+      <div className="mt-auto pt-10 text-sm text-bneBeige/80">
+        <p>© {new Date().getFullYear()} Landratsamt München</p>
+      </div>
+    </aside>
   );
 }
