@@ -1,3 +1,4 @@
+// src/MobileMenu.js
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -7,7 +8,7 @@ export default function MobileMenu() {
 
   return (
     <div className="md:hidden bg-bneBeige relative z-50">
-      {/* Toggle Button */}
+      {/* Hamburger Button */}
       <div className="flex justify-between items-center p-4 border-b border-gray-200">
         <button onClick={() => setOpen(!open)} className="text-bneGreen">
           {open ? <X size={28} /> : <Menu size={28} />}
@@ -16,14 +17,16 @@ export default function MobileMenu() {
 
       {/* Dropdown-Menü */}
       {open && (
-        <div className="w-full bg-white shadow-md animate-slide-down border-t border-gray-100">
+        <div className="w-full bg-white shadow-md border-t border-gray-100">
           <nav className="flex flex-col divide-y divide-gray-100 text-gray-800 font-medium">
-            <Link to="/" onClick={() => setOpen(false)} className="px-4 py-3 hover:bg-bneBeige">
+            <Link
+              to="/"
+              onClick={() => setOpen(false)}
+              className="px-4 py-3 hover:bg-bneBeige"
+            >
               🏠 Startseite
             </Link>
-            <Link to="/bne" onClick={() => setOpen(false)} className="px-4 py-3 hover:bg-bneBeige">
-              📚 Themen
-            </Link>
+
             <a
               href="/newsletter.pdf"
               target="_blank"
@@ -33,10 +36,20 @@ export default function MobileMenu() {
             >
               📥 Newsletter
             </a>
-            <Link to="/kontakt" onClick={() => setOpen(false)} className="px-4 py-3 hover:bg-bneBeige">
+
+            <Link
+              to="/kontakt"
+              onClick={() => setOpen(false)}
+              className="px-4 py-3 hover:bg-bneBeige"
+            >
               ✉️ Kontakt
             </Link>
-            <Link to="/lerneinheiten" onClick={() => setOpen(false)} className="px-4 py-3 hover:bg-bneBeige">
+
+            <Link
+              to="/lerneinheiten"
+              onClick={() => setOpen(false)}
+              className="px-4 py-3 hover:bg-bneBeige"
+            >
               ➕ Lerneinheiten
             </Link>
           </nav>

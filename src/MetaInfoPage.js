@@ -20,7 +20,7 @@ const MetaInfoPage = () => {
 
   return (
     <div className="min-h-screen bg-bneBeige text-gray-800 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto md:bg-white md:rounded-lg md:shadow-md md:p-8">
         <h1 className="text-3xl font-bold text-bneGreen mb-4 flex items-center gap-2">
           🧾 Meta-Informationen zum BNE-Prototyp
         </h1>
