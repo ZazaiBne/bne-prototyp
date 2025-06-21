@@ -57,7 +57,7 @@ const ScrollQuestionnaire = ({ responses, setResponses }) => {
 
           <section
             className={`border border-gray-200 p-4 rounded-xl shadow-sm mb-6 ${
-              i % 2 === 0 ? "bg-white" : "bg-gray-50"
+              i % 2 === 0 ? "bg-white" : "bg-bneSoftGreen"
             }`}
           >
             <fieldset>

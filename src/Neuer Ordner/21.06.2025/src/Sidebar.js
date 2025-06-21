@@ -1,49 +1,54 @@
 // src/Sidebar.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Sidebar() {
-  return (
-    <div className="hidden md:block w-64 min-h-screen bg-bneGreen text-bneBeige p-6 fixed left-0 top-0">
-      <h2 className="text-2xl font-bold mb-8">📘 Menü</h2>
+  const { pathname } = useLocation();
 
-      <nav className="space-y-4" aria-label="Hauptmenü">
-        {/* Newsletter als PDF (funktioniert wie Flyer) */}
+  const linkClasses = (path) =>
+    `block px-4 py-3 rounded-md text-white text-[17px] font-semibold tracking-normal leading-tight transition ${
+      pathname === path
+        ? "bg-white/20"
+        : "hover:bg-white/10"
+    } focus:outline-none focus:ring-2 focus:ring-white`;
+
+  return (
+    <aside className="hidden md:flex flex-col w-64 min-h-screen bg-bneGreen text-white p-6 fixed left-0 top-0 shadow-xl">
+      
+      {/* Logo */}
+      <div className="flex items-center justify-center mb-12 mt-4">
+        <img
+          src="/logo-bne.png"
+          alt="BNE-Prototyp Logo"
+          className="w-36"
+        />
+      </div>
+
+      {/* Navigation */}
+      <nav className="space-y-4 text-[17px]" aria-label="Hauptmenü">
+        <Link to="/" className={linkClasses("/")}>
+          Startseite
+        </Link>
         <a
           href="/newsletter.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="block hover:underline focus:outline-none focus:ring-2 focus:ring-bneBeige rounded"
+          className="block px-4 py-3 rounded-md text-white text-[17px] font-semibold tracking-normal leading-tight hover:bg-white/10 transition focus:outline-none focus:ring-2 focus:ring-white"
         >
-          📥 Newsletter
+          Newsletter
         </a>
-
-        {/* Flyer als PDF */}
-        <a
-          href="/flyer.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block hover:underline focus:outline-none focus:ring-2 focus:ring-bneBeige rounded"
-        >
-          📄 Flyer
-        </a>
-
-        {/* Kontaktseite */}
-        <Link
-          to="/kontakt"
-          className="block hover:underline focus:outline-none focus:ring-2 focus:ring-bneBeige rounded"
-        >
-          ✉️ Kontakt
+        <Link to="/kontakt" className={linkClasses("/kontakt")}>
+          Kontakt
         </Link>
-
-        {/* Vorschlagsseite */}
-        <Link
-          to="/vorschlag"
-          className="block hover:underline focus:outline-none focus:ring-2 focus:ring-bneBeige rounded"
-        >
-          ➕ Lerneinheiten
+        <Link to="/lerneinheiten" className={linkClasses("/lerneinheiten")}>
+          Lerneinheiten
         </Link>
       </nav>
-    </div>
+
+      {/* Footer */}
+      <div className="mt-auto pt-10 text-sm text-white/60 text-center">
+        © {new Date().getFullYear()} Landratsamt München
+      </div>
+    </aside>
   );
 }

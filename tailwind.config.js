@@ -15,6 +15,7 @@ module.exports = {
       colors: {
         bneGreen: '#7b944a',
         bneBeige: '#f9f8f4',
+        bneSoftGreen: '#edf2e0' // ✅ NEU: sehr helles BNE-Grün
       },
     },
   },
