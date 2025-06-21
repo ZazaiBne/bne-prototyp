@@ -1,48 +1,53 @@
 // src/Sidebar.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Sidebar() {
+  const { pathname } = useLocation();
+
+  const linkClasses = (path) =>
+    `block px-4 py-3 rounded-lg transition text-lg font-semibold tracking-wide ${
+      pathname === path
+        ? "bg-white/20 backdrop-blur-md"
+        : "hover:bg-white/10"
+    } focus:outline-none focus:ring-2 focus:ring-white`;
+
   return (
-    <aside className="hidden md:flex flex-col w-64 min-h-screen bg-bneGreen text-bneBeige p-6 fixed left-0 top-0 shadow-lg">
-      <h2 className="text-2xl font-bold mb-10 flex items-center gap-2">
-        📘 Menü
-      </h2>
+    <aside className="hidden md:flex flex-col w-64 min-h-screen bg-bneGreen/70 backdrop-blur-lg text-white p-6 fixed left-0 top-0 shadow-xl border-r border-white/10">
+      
+      {/* Logo */}
+      <div className="flex items-center justify-center mb-8 mt-8">
+        <img
+          src="/logo-bne.png"
+          alt="BNE-Prototyp Logo"
+          className="w-36"
+        />
+      </div>
 
-      <nav className="space-y-6 text-base font-medium" aria-label="Hauptmenü">
-        <Link
-          to="/"
-          className="block px-3 py-2 rounded hover:bg-bneBeige hover:text-bneGreen focus:outline-none focus:ring-2 focus:ring-bneBeige transition"
-        >
-          🏠 Startseite
+      {/* Navigation */}
+      <nav className="space-y-4 text-lg" aria-label="Hauptmenü">
+        <Link to="/" className={linkClasses("/")}>
+          Startseite
         </Link>
-
         <a
           href="/newsletter.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="block px-3 py-2 rounded hover:bg-bneBeige hover:text-bneGreen focus:outline-none focus:ring-2 focus:ring-bneBeige transition"
+          className="block px-4 py-3 rounded-lg hover:bg-white/10 transition text-lg font-semibold tracking-wide focus:outline-none focus:ring-2 focus:ring-white"
         >
-          📥 Newsletter
+          Newsletter
         </a>
-
-        <Link
-          to="/kontakt"
-          className="block px-3 py-2 rounded hover:bg-bneBeige hover:text-bneGreen focus:outline-none focus:ring-2 focus:ring-bneBeige transition"
-        >
-          ✉️ Kontakt
+        <Link to="/kontakt" className={linkClasses("/kontakt")}>
+          Kontakt
         </Link>
-
-        <Link
-          to="/lerneinheiten"
-          className="block px-3 py-2 rounded hover:bg-bneBeige hover:text-bneGreen focus:outline-none focus:ring-2 focus:ring-bneBeige transition"
-        >
-          ➕ Lerneinheiten
+        <Link to="/lerneinheiten" className={linkClasses("/lerneinheiten")}>
+          Lerneinheiten
         </Link>
       </nav>
 
-      <div className="mt-auto pt-10 text-sm text-bneBeige/80">
-        <p>© {new Date().getFullYear()} Landratsamt München</p>
+      {/* Footer */}
+      <div className="mt-auto pt-10 text-sm text-white/60 text-center">
+        © {new Date().getFullYear()} Landratsamt München
       </div>
     </aside>
   );
