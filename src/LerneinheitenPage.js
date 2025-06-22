@@ -1,15 +1,13 @@
 // src/LerneinheitenPage.js
-import React, { useState } from "react";
+import React from "react";
 import Sidebar from "./Sidebar";
-import { Link } from "react-router-dom";
+import MobileMenu from "./MobileMenu";
 
 const LerneinheitenPage = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   const einheiten = [
     {
       icon: "🌱",
-      titel: "Soziale Nachhaltigkeit in der Jugendarbeit",
+      titel: "Soziale Nachhaltigkeit",
       beschreibung:
         "Reflexion über Teilhabe, Gerechtigkeit und Diversität im Alltag non-formaler Bildungssettings.",
       link: "https://videos.simpleshow.com/O3SbwpqR0Q",
@@ -30,39 +28,13 @@ const LerneinheitenPage = () => {
 
   return (
     <div className="min-h-screen bg-bneBeige text-gray-800">
-      {/* 🔹 Mobiles Menü */}
-      <header className="md:hidden flex items-center justify-between p-4 border-b border-gray-300 bg-white sticky top-0 z-30">
-        <h1 className="text-xl font-semibold text-bneGreen">Selbstlerneinheiten</h1>
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="text-3xl"
-          aria-label="Menü öffnen"
-        >
-          ☰
-        </button>
-      </header>
+      {/* 🔹 Einheitliches mobiles Menü */}
+      <MobileMenu />
 
-      {menuOpen && (
-        <nav className="md:hidden bg-white border-b border-gray-200 shadow z-20">
-          <ul className="flex flex-col px-4 py-2">
-            <Link to="/" className="py-2 border-b hover:underline">
-              Startseite
-            </Link>
-            <Link to="/kontakt" className="py-2 border-b hover:underline">
-              Kontakt
-            </Link>
-            <Link to="/lerneinheiten" className="py-2 hover:underline">
-              Selbstlerneinheiten
-            </Link>
-          </ul>
-        </nav>
-      )}
-
-      {/* 🔹 Desktop Sidebar */}
+      {/* 🔹 Desktop Sidebar + Hauptinhalt */}
       <div className="flex">
         <Sidebar />
 
-        {/* 🔸 Hauptinhalt */}
         <main className="ml-0 md:ml-64 w-full px-4 md:px-10 py-10 max-w-6xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold mb-6 text-bneGreen text-center md:text-left">
             Selbstlerneinheiten
@@ -80,7 +52,6 @@ const LerneinheitenPage = () => {
               >
                 <div className="text-3xl mb-3">{einheit.icon}</div>
 
-                {/* Titel als Link wenn vorhanden */}
                 {einheit.link ? (
                   <a
                     href={einheit.link}
