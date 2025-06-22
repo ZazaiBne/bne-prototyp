@@ -41,7 +41,7 @@ export default function Sidebar() {
           Kontakt
         </Link>
         <Link to="/lerneinheiten" className={linkClasses("/lerneinheiten")}>
-          Lerneinheiten
+          Selbstlerneinheiten
         </Link>
       </nav>
 
