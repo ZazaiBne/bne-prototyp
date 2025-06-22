@@ -50,7 +50,7 @@ export default function MobileMenu() {
               onClick={() => setOpen(false)}
               className="px-4 py-3 hover:bg-bneBeige"
             >
-              ➕ Lerneinheiten
+              ➕ Selbstlerneinheiten
             </Link>
           </nav>
         </div>
